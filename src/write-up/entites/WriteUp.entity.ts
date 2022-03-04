@@ -1,37 +1,49 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
-import { IsDate, IsMongoId, IsString } from 'class-validator';
+import { IsBoolean, IsDate, IsMongoId, IsString } from 'class-validator';
 
-@Entity('writeUps')
-export class WriteUp {
+@Entity('writeUpForms')
+export class WriteUpForm {
   @ObjectIdColumn()
   @IsMongoId()
   id: ObjectID;
 
-//   @Column()
-//   @IsString()
-//   firstName: string;
+  @ObjectIdColumn()
+  @IsMongoId()
+  userId: ObjectID;
 
-//   @Column()
-//   @IsString()
-//   lastName: string;
+  @Column()
+  @IsString()
+  name: string;
 
-//   @Column()
-//   @IsString()
-//   username: string;
+  @Column()
+  @IsString()
+  siteName: string;
 
-//   @Column()
-//   @IsString()
-//   email: string;
+  @Column()
+  @IsBoolean()
+  fullyTorchedAdhesiveAndAllJointsBleeding: boolean;
 
-//   @Column()
-//   @IsString()
-//   password: string;
+  @Column()
+  @IsBoolean()
+  keyAreasCheckedForMoisture: boolean;
 
-//   @Column()
-//   @IsDate()
-//   createdAt: string;
+  @Column()
+  @IsBoolean()
+  noPipeProtrusionsCloseToWalls: boolean;
 
-//   @Column()
-//   @IsDate()
-//   updatedAt: string;
+  @Column()
+  @IsBoolean()
+  screedsInCorrectDirection: boolean;
+
+  @Column()
+  @IsBoolean()
+  surfacesCleanedAndCorrectedForPrimer: boolean;
+
+  @Column()
+  @IsDate()
+  createdAt: Date = new Date();
+
+  @Column()
+  @IsDate()
+  updatedAt: Date;
 }
