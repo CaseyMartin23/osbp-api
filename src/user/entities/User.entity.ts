@@ -17,10 +17,6 @@ export class User {
 
   @Column()
   @IsString()
-  username: string;
-
-  @Column()
-  @IsString()
   email: string;
 
   @Column()
@@ -29,9 +25,9 @@ export class User {
 
   @Column()
   @IsDate()
-  createdAt: string;
+  createdAt: Date;
 
   @Column()
   @IsDate()
-  updatedAt: string;
+  updatedAt: Date;
 }

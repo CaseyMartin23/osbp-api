@@ -23,8 +23,8 @@ export class UserService {
       newUser.firstName = user.firstName;
       newUser.lastName = user.lastName;
       newUser.email = user.email;
-      newUser.username = user.username;
       newUser.password = hashedPassword;
+      newUser.createdAt = new Date()
       
       const createdUser = await this.userRepository.save(newUser)
       delete createdUser.password

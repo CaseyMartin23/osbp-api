@@ -1,15 +1,22 @@
-import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
-import { IsBoolean, IsDate, IsMongoId, IsString } from 'class-validator';
+import { Column, Entity, ObjectIdColumn } from 'typeorm';
+import { IsBoolean, IsDate, IsEnum, IsMongoId, IsString } from 'class-validator';
+import { ObjectId } from 'mongodb';
+
+enum WriteUpState {
+  Done = 'DONE',
+  Pending = 'PENDING',
+  Draft = 'DRAFT',
+}
 
 @Entity('writeUpForms')
 export class WriteUpForm {
   @ObjectIdColumn()
   @IsMongoId()
-  id: ObjectID;
+  id: ObjectId;
 
-  @ObjectIdColumn()
+  @Column()
   @IsMongoId()
-  userId: ObjectID;
+  userId: ObjectId;
 
   @Column()
   @IsString()
@@ -38,6 +45,10 @@ export class WriteUpForm {
   @Column()
   @IsBoolean()
   surfacesCleanedAndCorrectedForPrimer: boolean;
+
+  @Column()
+  @IsEnum(WriteUpState)
+  state: string = WriteUpState.Pending;
 
   @Column()
   @IsDate()
