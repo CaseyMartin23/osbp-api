@@ -1,5 +1,6 @@
 import { Column, Entity, ObjectID, ObjectIdColumn } from 'typeorm';
-import { IsDate, IsMongoId, IsString } from 'class-validator';
+import { IsArray, IsDate, IsMongoId, IsString } from 'class-validator';
+import { Role } from 'src/role.enum';
 
 @Entity('users')
 export class User {
@@ -22,6 +23,10 @@ export class User {
   @Column()
   @IsString()
   password: string;
+
+  @Column()
+  @IsArray()
+  roles: Role[] = [Role.User];
 
   @Column()
   @IsDate()

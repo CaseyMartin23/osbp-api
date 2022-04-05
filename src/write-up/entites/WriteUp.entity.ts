@@ -1,5 +1,5 @@
 import { Column, Entity, ObjectIdColumn } from 'typeorm';
-import { IsBoolean, IsDate, IsEnum, IsMongoId, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsDate, IsEnum, IsMongoId, IsString } from 'class-validator';
 import { ObjectId } from 'mongodb';
 
 enum WriteUpState {
@@ -31,20 +31,60 @@ export class WriteUpForm {
   fullyTorchedAdhesiveAndAllJointsBleeding: boolean;
 
   @Column()
+  @IsArray()
+  allBleedingJointImages: any[];
+
+  @Column()
   @IsBoolean()
   keyAreasCheckedForMoisture: boolean;
+
+  @Column()
+  @IsArray()
+  keyAreasMoistureTempImages: any[];
 
   @Column()
   @IsBoolean()
   noPipeProtrusionsCloseToWalls: boolean;
 
   @Column()
+  @IsArray()
+  noProtrusionsImages: any[];
+
+  @Column()
   @IsBoolean()
   screedsInCorrectDirection: boolean;
 
   @Column()
+  @IsArray()
+  screedImages: any[];
+
+  @Column()
   @IsBoolean()
   surfacesCleanedAndCorrectedForPrimer: boolean;
+
+  @Column()
+  @IsArray()
+  cleanedAndPrepedSurfaceImages: any[];
+
+  @Column()
+  @IsArray()
+  detailedImagesOfCorners: any[];
+
+  @Column()
+  @IsArray()
+  protrutionImages: any[];
+
+  @Column()
+  @IsArray()
+  terminationImages: any[];
+
+  @Column()
+  @IsArray()
+  staggeredOverlapsImages: any[];
+
+  @Column()
+  @IsArray()
+  counterflashingImages: any[];
 
   @Column()
   @IsEnum(WriteUpState)

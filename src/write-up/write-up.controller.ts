@@ -9,6 +9,8 @@ import {
   Query,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Role } from 'src/role.enum';
+import { Roles } from 'src/roles.decorator';
 import { WriteUpFormDto } from './dtos/WriteUpForm.dto';
 import { WriteUpService } from './write-up.service';
 
@@ -34,8 +36,15 @@ export class WriteUpController {
   }
 
   @Get(':id')
-  public getWriteUp(@Param('id') writeUpId: string) {
+  public getWriteUpById(@Param('id') writeUpId: string) {
     return this.writeUpService.getById(writeUpId);
+  }
+
+  @Get('user/count')
+  public async getUserWriteUpCount(
+    @Param('userId') userId: string,
+  ) {
+    return await this.writeUpService.getWriteUpCount(userId);
   }
 
   @Get()
@@ -44,6 +53,12 @@ export class WriteUpController {
     @Query('state') writeUpState: string,
   ) {
     return this.writeUpService.getUserWriteUps(userId, writeUpState);
+  }
+
+  @Roles(Role.Admin)
+  @Get('test/user/role')
+  public testAuthRoles() {
+    return { message: 'Your ank Admin!' }
   }
 
 }

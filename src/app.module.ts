@@ -1,7 +1,8 @@
+import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ServeStaticModule } from '@nestjs/serve-static'
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MulterModule } from '@nestjs/platform-express';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { WriteUpModule } from './write-up/write-up.module';
@@ -18,10 +19,14 @@ import { WriteUpModule } from './write-up/write-up.module';
       useUnifiedTopology: true,
       useNewUrlParser: true,
     }),
-    MulterModule.register({ dest: './temp-images' }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'admin-portal', 'build'),
+    }),
     UserModule,
     AuthModule,
     WriteUpModule,
   ],
+  
 })
+
 export class AppModule {}

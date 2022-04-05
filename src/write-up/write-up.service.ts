@@ -32,7 +32,17 @@ export class WriteUpService {
       keyAreasCheckedForMoisture,
       noPipeProtrusionsCloseToWalls,
       screedsInCorrectDirection,
-      surfacesCleanedAndCorrectedForPrimer
+      surfacesCleanedAndCorrectedForPrimer,
+      allBleedingJointImages,
+      keyAreasMoistureTempImages,
+      noProtrusionsImages,
+      screedImages,
+      cleanedAndPrepedSurfaceImages,
+      detailedImagesOfCorners,
+      protrutionImages,
+      terminationImages,
+      staggeredOverlapsImages,
+      counterflashingImages,
     } = writeUpToCreate;
     const writeUpForm = new WriteUpForm()
 
@@ -44,18 +54,34 @@ export class WriteUpService {
     writeUpForm.noPipeProtrusionsCloseToWalls = noPipeProtrusionsCloseToWalls;
     writeUpForm.screedsInCorrectDirection = screedsInCorrectDirection;
     writeUpForm.surfacesCleanedAndCorrectedForPrimer = surfacesCleanedAndCorrectedForPrimer;
+    writeUpForm.allBleedingJointImages = allBleedingJointImages;
+    writeUpForm.keyAreasMoistureTempImages = keyAreasMoistureTempImages;
+    writeUpForm.noProtrusionsImages = noProtrusionsImages;
+    writeUpForm.screedImages = screedImages;
+    writeUpForm.cleanedAndPrepedSurfaceImages = cleanedAndPrepedSurfaceImages;
+    writeUpForm.detailedImagesOfCorners = detailedImagesOfCorners;
+    writeUpForm.protrutionImages = protrutionImages;
+    writeUpForm.terminationImages = terminationImages;
+    writeUpForm.staggeredOverlapsImages = staggeredOverlapsImages;
+    writeUpForm.counterflashingImages = counterflashingImages;
 
     return writeUpForm;
   }
 
   public async update(id: string | ObjectId, updateWriteUpDto: WriteUpFormDto) {
     try {
+      console.log('entered update()')
       this.validateId(id, 'write-up form');
 
       await this.writeUpFormRepository.update(
         new ObjectId(id),
-        updateWriteUpDto,
+        {
+          ...updateWriteUpDto,
+          userId: new ObjectId(updateWriteUpDto.userId),
+          id: new ObjectId(updateWriteUpDto.id)
+        },
       );
+
       return await this.getById(id);
     } catch (err) {
       throw new Error(err);
@@ -64,6 +90,8 @@ export class WriteUpService {
 
   public async getById(id: string | ObjectId) {
     try {
+      console.log('entered getById()')
+      console.log('id:', id)
       this.validateId(id, 'write-up form');
 
       return await this.writeUpFormRepository.findOne(new ObjectId(id));
@@ -96,6 +124,15 @@ export class WriteUpService {
     } catch (err) {
       throw new Error(err);
     }
+  }
+
+  public async getWriteUpCount(userId: string | ObjectId) {
+    this.validateId(userId, 'user')
+
+    const count = await this.writeUpFormRepository.count({ userId })
+    console.log("count:", count)
+    
+    return count;
   }
 
   private validateId(id: string | ObjectId, idType: string) {
