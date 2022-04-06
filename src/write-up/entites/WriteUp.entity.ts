@@ -3,9 +3,9 @@ import { IsArray, IsBoolean, IsDate, IsEnum, IsMongoId, IsString } from 'class-v
 import { ObjectId } from 'mongodb';
 
 enum WriteUpState {
-  Done = 'DONE',
-  Pending = 'PENDING',
-  Draft = 'DRAFT',
+  Completed = 'Completed',
+  Processing = 'Processing',
+  Failed = 'Failed',
 }
 
 @Entity('writeUpForms')
@@ -88,7 +88,7 @@ export class WriteUpForm {
 
   @Column()
   @IsEnum(WriteUpState)
-  state: string = WriteUpState.Pending;
+  state: string = WriteUpState.Processing;
 
   @Column()
   @IsDate()
