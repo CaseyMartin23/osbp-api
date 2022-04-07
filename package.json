@@ -5,8 +5,12 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "node": "17.3.0",
+    "npm": "8.3.0"
+  },
   "scripts": {
-    "frontend:build": "cd admin-portal && npm install && npm build",
+    "frontend:build": "cd admin-portal && npm run build",
     "prebuild": "rimraf dist && npm run frontend:build",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
