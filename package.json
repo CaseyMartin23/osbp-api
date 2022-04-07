@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "frontend:build": "cd admin-portal && npm build",
+    "frontend:build": "cd admin-portal && npm install && npm build",
     "prebuild": "rimraf dist && npm run frontend:build",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
