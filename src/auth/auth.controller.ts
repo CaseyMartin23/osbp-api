@@ -11,7 +11,7 @@ import { SignUpDto } from './dto/SignUp.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 
-@Controller('api/v1/auth')
+@Controller('api/v1/auth/user/')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
