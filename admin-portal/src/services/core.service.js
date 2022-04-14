@@ -1,15 +1,17 @@
 class CoreService {
-  #baseUrl = '/';
+  #baseUrl = process.env.REACT_APP_API_BASE_URL;
 
   async post(url = "", headers = {}, body = {}){
     try {
-      await fetch(`${this.#baseUrl}/${url}`, {
+      const res = await fetch(`${this.#baseUrl}${url}`, {
         method: "POST",
         headers: {
           ...headers,
         },
-        body: { ...body }
+        body: JSON.stringify({ ...body })
       })
+
+      console.log("Core Service res:", res)
     } catch (err) {
       throw new Error(err)
     }

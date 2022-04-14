@@ -1,7 +1,7 @@
 import CoreService from './core.service';
 
 class AuthService {
-  #authBaseUrl = 'auth/';
+  #authBaseUrl = `auth/`;
   #authHeaders = {};
 
   async logInUser(authInfo) {
@@ -10,7 +10,6 @@ class AuthService {
       this.#authHeaders,
       authInfo,
     );
-    console.log('logInUser-res->', res);
   }
 
   async signUpUser(signUpInfo) {
