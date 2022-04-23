@@ -128,12 +128,10 @@ export class WriteUpService {
   }
 
   public async getWriteUpCount(userId: string | ObjectId) {
-    this.validateId(userId, 'user')
+    const id = new ObjectId(userId)
+    this.validateId(id, 'user')
 
-    const count = await this.writeUpFormRepository.count({ userId })
-    console.log("count:", count)
-    
-    return count;
+    return await this.writeUpFormRepository.count({ userId: id })
   }
 
   private validateId(id: string | ObjectId, idType: string) {
