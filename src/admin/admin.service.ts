@@ -12,7 +12,17 @@ export class AdminService {
 
   public async getAllUsers(idToExclude: string) {
     const allUsers = await this.userService.findUsers();
-    return allUsers.filter((user) => user.id.toHexString() !== idToExclude)
+    const users = allUsers.filter((user) => user.id.toHexString() !== idToExclude)
+    
+    return users.map(async (user) => {
+      const userId = user.id.toHexString()
+      const writeUpCount = await this.writeUpService.getWriteUpCount(userId)
+      
+      return {
+        ...user,
+        writeUpCount,
+      }
+    })
   }
 
   public async getUserWriteUps(userId: string) {
