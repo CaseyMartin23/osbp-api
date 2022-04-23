@@ -33,8 +33,20 @@ export class UserService {
     }
   }
 
+  public async findUsers() {
+    const users = await this.userRepository.find({})
+    return this.removeUserPasswords(users)
+  }
+
   public async findByEmail(email: string): Promise<User> {
     const [user] = await this.userRepository.find({ email });
     return user;
+  }
+
+  private removeUserPasswords(users: User[]) {
+    return users.map((user) => {
+      const { password, ...rest } = user;
+      return rest
+    })
   }
 }

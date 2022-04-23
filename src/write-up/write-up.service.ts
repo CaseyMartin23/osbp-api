@@ -104,19 +104,20 @@ export class WriteUpService {
     userId: string | ObjectId,
     writeUpState?: string,
   ) {
-    let userWriteUps;
+    const id = new ObjectId(userId);
+    let userWriteUps = [];
 
     try {
-      this.validateId(userId, 'user');
+      this.validateId(id, 'user');
 
       if (writeUpState) {
         userWriteUps = await this.writeUpFormRepository.find({
-          userId: new ObjectId(userId),
+          userId: id,
           state: writeUpState,
         });
       } else {
         userWriteUps = await this.writeUpFormRepository.find({
-          userId: new ObjectId(userId),
+          userId: id,
         });
       }
 

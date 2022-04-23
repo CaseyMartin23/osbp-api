@@ -9,8 +9,6 @@ import {
   Query,
 } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { Role } from 'src/role.enum';
-import { Roles } from 'src/roles.decorator';
 import { WriteUpFormDto } from './dtos/WriteUpForm.dto';
 import { WriteUpService } from './write-up.service';
 
@@ -54,11 +52,4 @@ export class WriteUpController {
   ) {
     return this.writeUpService.getUserWriteUps(userId, writeUpState);
   }
-
-  @Roles(Role.Admin)
-  @Get('test/user/role')
-  public testAuthRoles() {
-    return { message: 'Your ank Admin!' }
-  }
-
 }
