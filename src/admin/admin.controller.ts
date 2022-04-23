@@ -8,21 +8,21 @@ import { WriteUpFormDto } from "src/write-up/dtos/WriteUpForm.dto";
 
 @Roles(Role.Admin)
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Controller('api/v1/admin-user/')
+@Controller('api/v1/admin-user/:id')
 export class AdminController {
   constructor(private adminService: AdminService){}
   
   @Get('users')
-  public async getUsers() {
-    return await this.adminService.getAllUsers()
+  public async getUsers(@Param('id') id: string) {
+    return await this.adminService.getAllUsers(id)
   }
 
-  @Get(':userId/write-ups')
+  @Get('users/:userId/write-ups')
   public async getUserWriteUps(@Param('userId') userId: string) {
     return await this.adminService.getUserWriteUps(userId)
   }
 
-  @Put(':writeUpId/write-up')
+  @Put('users/:userId/write-ups/:writeUpId')
   public async updateWriteUpState(
     @Param('writeUpId') id: string,
     @Body() writeUpBody: WriteUpFormDto

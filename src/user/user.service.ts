@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/User.entity';
 import * as bcrypt from 'bcrypt';
 import { SignUpDto } from 'src/auth/dto/SignUp.dto';
+import { ObjectId } from 'mongodb';
 
 @Injectable()
 export class UserService {
