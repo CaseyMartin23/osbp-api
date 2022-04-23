@@ -13,8 +13,8 @@ export class AdminController {
   constructor(private adminService: AdminService){}
   
   @Get('users')
-  public async getUsers(@Param('id') id: string) {
-    return await this.adminService.getAllUsers(id)
+  public async getUsers() {
+    return await this.adminService.getAllUsers()
   }
 
   @Get('users/:userId/write-ups')

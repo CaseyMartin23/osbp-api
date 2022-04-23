@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { Role } from 'src/role.enum';
 import { UserService } from 'src/user/user.service';
 import { WriteUpFormDto } from 'src/write-up/dtos/WriteUpForm.dto';
 import { WriteUpService } from 'src/write-up/write-up.service';
@@ -10,9 +11,9 @@ export class AdminService {
     private writeUpService: WriteUpService,
   ) {}
 
-  public async getAllUsers(idToExclude: string) {
+  public async getAllUsers() {
     const allUsers = await this.userService.findUsers();
-    const users = allUsers.filter((user) => user.id.toHexString() !== idToExclude)
+    const users = allUsers.filter((user) => !user.roles.includes(Role.Admin))
     const usersWithWriteUpCount = Promise.all(users.map(async (user) => {
       const userId = user.id.toHexString()
       const writeUpCount = await this.writeUpService.getWriteUpCount(userId)
