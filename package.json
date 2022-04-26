@@ -1,14 +1,10 @@
 {
   "name": "osbp-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "API for OSBP system",
+  "author": "Charles-Casey Martin",
   "private": true,
   "license": "UNLICENSED",
-  "engines": {
-    "node": "17.3.0",
-    "npm": "8.3.0"
-  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -35,7 +31,7 @@
     "@nestjs/typeorm": "^8.0.3",
     "bcrypt": "^5.0.1",
     "class-validator": "^0.13.2",
-    "mongodb": "^4.4.0",
+    "mongodb": "^3.6.0",
     "multer": "^1.4.4",
     "passport": "^0.5.2",
     "passport-jwt": "^4.0.0",
@@ -43,7 +39,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "typeorm": "^0.2.44"
+    "typeorm": "^0.2.45"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",

@@ -14,12 +14,14 @@ export class AdminService {
   public async getAllUsers() {
     const allUsers = await this.userService.findUsers();
     const users = allUsers.filter((user) => !user.roles.includes(Role.Admin))
+    
     const usersWithWriteUpCount = Promise.all(users.map(async (user) => {
       const userId = user.id.toHexString()
       const writeUpCount = await this.writeUpService.getWriteUpCount(userId)
+      const { roles, ...userWithoutRoles } = user
       
       return {
-        ...user,
+        ...userWithoutRoles,
         writeUpCount,
       }
     }))
