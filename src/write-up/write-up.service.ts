@@ -70,7 +70,6 @@ export class WriteUpService {
 
   public async update(id: string | ObjectId, updateWriteUpDto: WriteUpFormDto) {
     try {
-      console.log('entered update()')
       this.validateId(id, 'write-up form');
 
       await this.writeUpFormRepository.update(
@@ -78,7 +77,6 @@ export class WriteUpService {
         {
           ...updateWriteUpDto,
           userId: new ObjectId(updateWriteUpDto.userId),
-          id: new ObjectId(updateWriteUpDto.id)
         },
       );
 
