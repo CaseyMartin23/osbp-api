@@ -22,7 +22,7 @@ export class AdminController {
     return await this.adminService.getUserWriteUps(userId)
   }
 
-  @Put('users/:userId/write-ups/:writeUpId')
+  @Put('write-ups/:writeUpId')
   public async updateWriteUpState(
     @Param('writeUpId') id: string,
     @Body() writeUpBody: WriteUpFormDto
