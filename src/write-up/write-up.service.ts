@@ -77,6 +77,7 @@ export class WriteUpService {
         {
           ...updateWriteUpDto,
           userId: new ObjectId(updateWriteUpDto.userId),
+          updatedAt: new Date()
         },
       );
 
