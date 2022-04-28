@@ -34,6 +34,6 @@ export class AdminService {
   }
 
   public async updateWriteUp(writeUpId: string, newWriteUp: WriteUpFormDto) {
-    await this.writeUpService.update(writeUpId, newWriteUp);
+    return await this.writeUpService.update(writeUpId, newWriteUp);
   }
 }
