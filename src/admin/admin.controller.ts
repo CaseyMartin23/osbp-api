@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Put, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, HttpException, HttpStatus, Param, Put, UseGuards } from "@nestjs/common";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { RolesGuard } from "src/roles.guard";
 import { Roles } from "src/roles.decorator";
@@ -27,6 +27,10 @@ export class AdminController {
     @Param('writeUpId') id: string,
     @Body() writeUpBody: WriteUpFormDto
   ){
+    if(!writeUpBody || Object.keys(writeUpBody).length < 1) {
+      throw new HttpException("Invalid Write-up Body", HttpStatus.BAD_REQUEST)
+    }
+
     return await this.adminService.updateWriteUp(id, writeUpBody)
   }
 }
